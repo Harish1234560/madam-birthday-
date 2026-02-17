@@ -116,7 +116,7 @@ export default function Index() {
           transition={{ delay: 2.5 }}
         >
           <p className="text-sm text-muted-foreground">
-            Made with 💖 just for you
+            Made with 💖 by a student, for a wonderful teacher
           </p>
         </motion.footer>
       </main>
