@@ -1,0 +1,375 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Midnight Cinema Theme */
+    --background: 222 47% 8%;
+    --foreground: 38 100% 95%;
+
+    --card: 222 40% 12%;
+    --card-foreground: 38 100% 95%;
+
+    --popover: 222 40% 12%;
+    --popover-foreground: 38 100% 95%;
+
+    /* Rose Gold Primary */
+    --primary: 350 80% 65%;
+    --primary-foreground: 222 47% 8%;
+
+    /* Champagne Gold Secondary */
+    --secondary: 38 80% 60%;
+    --secondary-foreground: 222 47% 8%;
+
+    /* Muted Midnight */
+    --muted: 222 30% 18%;
+    --muted-foreground: 222 20% 60%;
+
+    /* Coral Accent */
+    --accent: 16 90% 65%;
+    --accent-foreground: 222 47% 8%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 222 30% 20%;
+    --input: 222 30% 20%;
+    --ring: 350 80% 65%;
+
+    --radius: 1rem;
+
+    /* Custom Birthday Colors */
+    --rose-gold: 350 80% 65%;
+    --champagne: 38 80% 60%;
+    --coral: 16 90% 65%;
+    --midnight: 222 47% 8%;
+    --deep-navy: 222 40% 12%;
+    --starlight: 38 100% 95%;
+    --neon-pink: 330 100% 70%;
+    --neon-cyan: 180 100% 70%;
+    
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(350 80% 65%) 0%, hsl(38 80% 60%) 50%, hsl(16 90% 65%) 100%);
+    --gradient-glass: linear-gradient(135deg, hsla(222, 40%, 20%, 0.4) 0%, hsla(222, 40%, 15%, 0.2) 100%);
+    --gradient-glow: radial-gradient(circle at 50% 50%, hsla(350, 80%, 65%, 0.3) 0%, transparent 70%);
+    --gradient-celebration: linear-gradient(180deg, hsl(222 47% 8%) 0%, hsl(222 40% 12%) 50%, hsl(222 47% 8%) 100%);
+    
+    /* Shadows */
+    --shadow-neon: 0 0 20px hsla(350, 80%, 65%, 0.5), 0 0 40px hsla(350, 80%, 65%, 0.3);
+    --shadow-gold: 0 0 20px hsla(38, 80%, 60%, 0.5), 0 0 40px hsla(38, 80%, 60%, 0.3);
+    --shadow-glass: 0 8px 32px hsla(0, 0%, 0%, 0.3);
+    --shadow-floating: 0 20px 60px hsla(0, 0%, 0%, 0.4);
+
+    --sidebar-background: 222 47% 8%;
+    --sidebar-foreground: 38 100% 95%;
+    --sidebar-primary: 350 80% 65%;
+    --sidebar-primary-foreground: 222 47% 8%;
+    --sidebar-accent: 222 30% 18%;
+    --sidebar-accent-foreground: 38 100% 95%;
+    --sidebar-border: 222 30% 20%;
+    --sidebar-ring: 350 80% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+@layer components {
+  /* Glassmorphism Card */
+  .glass-card {
+    @apply relative overflow-hidden rounded-2xl;
+    background: linear-gradient(135deg, hsla(222, 40%, 20%, 0.6) 0%, hsla(222, 40%, 15%, 0.3) 100%);
+    backdrop-filter: blur(20px);
+    border: 1px solid hsla(38, 80%, 60%, 0.2);
+    box-shadow: var(--shadow-glass);
+  }
+
+  .glass-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, hsla(350, 80%, 65%, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  /* Neon Glow Button */
+  .neon-button {
+    @apply relative px-8 py-4 rounded-full font-semibold transition-all duration-300;
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 100%);
+    color: hsl(var(--primary-foreground));
+    box-shadow: var(--shadow-neon);
+  }
+
+  .neon-button:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 0 30px hsla(350, 80%, 65%, 0.7), 0 0 60px hsla(350, 80%, 65%, 0.4);
+  }
+
+  /* Floating Action Button */
+  .floating-action {
+    @apply relative p-4 rounded-2xl transition-all duration-500 cursor-pointer;
+    background: linear-gradient(135deg, hsla(222, 40%, 20%, 0.8) 0%, hsla(222, 40%, 15%, 0.6) 100%);
+    backdrop-filter: blur(20px);
+    border: 1px solid hsla(38, 80%, 60%, 0.3);
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .floating-action:hover {
+    transform: translateY(-8px) scale(1.05);
+    border-color: hsl(var(--primary));
+    box-shadow: var(--shadow-neon);
+  }
+
+  /* Sparkle Cursor Trail */
+  .sparkle {
+    position: fixed;
+    pointer-events: none;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: radial-gradient(circle, hsl(var(--secondary)) 0%, transparent 70%);
+    animation: sparkle-fade 0.8s ease-out forwards;
+    z-index: 9999;
+  }
+
+  /* Typewriter Effect */
+  .typewriter {
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typewriter 3s steps(40) forwards;
+  }
+
+  /* Polaroid Photo */
+  .polaroid {
+    @apply relative p-3 pb-12 rounded-sm;
+    background: hsl(var(--starlight));
+    box-shadow: var(--shadow-floating);
+    transform: rotate(var(--rotation, 0deg));
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .polaroid:hover {
+    transform: rotate(0deg) scale(1.1) translateY(-10px);
+    z-index: 10;
+    box-shadow: 0 30px 80px hsla(0, 0%, 0%, 0.5);
+  }
+
+  /* Gift Box */
+  .gift-box {
+    @apply relative cursor-pointer transition-all duration-300;
+    animation: gift-wiggle 2s ease-in-out infinite;
+  }
+
+  .gift-box:hover {
+    animation: gift-shake 0.5s ease-in-out;
+  }
+
+  /* Candle Flame */
+  .flame {
+    @apply absolute;
+    width: 20px;
+    height: 40px;
+    background: linear-gradient(to top, hsl(38, 100%, 50%) 0%, hsl(30, 100%, 60%) 50%, hsl(45, 100%, 70%) 100%);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    animation: flicker 0.3s ease-in-out infinite alternate;
+    filter: blur(1px);
+    box-shadow: 0 0 20px hsl(38, 100%, 60%), 0 0 40px hsl(30, 100%, 50%), 0 0 60px hsl(38, 100%, 40%);
+  }
+
+  .flame::before {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 10px;
+    background: hsl(200, 100%, 80%);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  }
+}
+
+@layer utilities {
+  /* Animations */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  @keyframes float-delayed {
+    0%, 100% { transform: translateY(0px) rotate(3deg); }
+    50% { transform: translateY(-15px) rotate(-3deg); }
+  }
+
+  @keyframes sparkle-fade {
+    0% { 
+      opacity: 1; 
+      transform: scale(1); 
+    }
+    100% { 
+      opacity: 0; 
+      transform: scale(0); 
+    }
+  }
+
+  @keyframes typewriter {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+
+  @keyframes flicker {
+    0% { 
+      transform: scaleY(1) scaleX(1); 
+      opacity: 1;
+    }
+    100% { 
+      transform: scaleY(1.1) scaleX(0.9); 
+      opacity: 0.9;
+    }
+  }
+
+  @keyframes gift-wiggle {
+    0%, 100% { transform: rotate(-2deg); }
+    50% { transform: rotate(2deg); }
+  }
+
+  @keyframes gift-shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px) rotate(-5deg); }
+    75% { transform: translateX(5px) rotate(5deg); }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { 
+      box-shadow: 0 0 20px hsla(350, 80%, 65%, 0.5);
+    }
+    50% { 
+      box-shadow: 0 0 40px hsla(350, 80%, 65%, 0.8), 0 0 60px hsla(38, 80%, 60%, 0.4);
+    }
+  }
+
+  @keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  @keyframes reveal-up {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in-scale {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes particle-rise {
+    0% {
+      transform: translateY(100vh) rotate(0deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-100vh) rotate(720deg);
+      opacity: 0;
+    }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-float-delayed {
+    animation: float-delayed 8s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient-shift 4s ease infinite;
+  }
+
+  .animate-reveal-up {
+    animation: reveal-up 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .animate-fade-in-scale {
+    animation: fade-in-scale 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 50%, hsl(var(--accent)) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 20px hsla(350, 80%, 65%, 0.5), 0 0 40px hsla(350, 80%, 65%, 0.3);
+  }
+
+  .border-glow {
+    border: 1px solid hsla(38, 80%, 60%, 0.3);
+    box-shadow: inset 0 0 20px hsla(350, 80%, 65%, 0.1);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--midnight));
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 100%);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary));
+}
+
+/* Selection */
+::selection {
+  background: hsla(350, 80%, 65%, 0.3);
+  color: hsl(var(--starlight));
+}
